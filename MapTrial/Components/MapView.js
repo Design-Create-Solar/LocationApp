@@ -41,7 +41,7 @@ export default class App extends Component {
   constructor (props)
   {
     super(props)
-    this.state = {place:{}, locations:locations, capacity: ["42%"]}
+    this.state = {place:{}, locations:locations, capacity: ["42"]}
   }
   
   openSearchModal() {
