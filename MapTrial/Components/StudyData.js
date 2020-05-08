@@ -9,7 +9,7 @@ export const locations =
     },
     
     {
-        title: 'The Study', latitude: 34.07326,
+        title: 'Study', latitude: 34.07326,
         longitude: -118.452333,
         identifier: '1',
         markerImage: "https://s3.amazonaws.com/cms.ipressroom.com/173/files/20173/58ed3cbf2cfac27981020ccd_Study+at+Hedrick+DSC06641/Study+at+Hedrick+DSC06641_575bfcdf-206f-4c28-a3a6-e18136e84e84-prv.jpg",

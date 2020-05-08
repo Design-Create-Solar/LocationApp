@@ -26,7 +26,7 @@ import {
 
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps'
 
-import { locations } from './StudyData'
+import { locations } from './DiningData'
 import RNGooglePlaces from 'react-native-google-places';
 import Geolocation from '@react-native-community/geolocation';
 import CustomMarker from './CustomMarkers'
@@ -41,7 +41,7 @@ export default class App extends Component {
   constructor (props)
   {
     super(props)
-    this.state = {place:{}, locations:locations, capacity: [42, 10, 90, 75, 32, 46, 2]}
+    this.state = {place:{}, locations:locations, capacity: [26, 2, 90, 81, 56, 32, 71]}
   }
   
   openSearchModal() {
