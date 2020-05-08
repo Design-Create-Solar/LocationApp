@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         width: 50,
         borderRadius: 80,
         borderWidth: 3,
-        borderColor: 'red'
+        borderColor: '#ffffff'
     }
 })
 

@@ -34,14 +34,14 @@ import CustomMarker from './CustomMarkers'
 export default class App extends Component {
   getCurrentLocation(){
     Geolocation.getCurrentPosition(info => //console.log(info)
-      this.setState({place:{latitude:info.coords.latitude, longitude:info.coords.longitude}})
+      this.setState({place:{latitude:info.coords.latitude, longitude:info.coords.longitude}}) //set this to default UCLA values for testing
       )
   }
 
   constructor (props)
   {
     super(props)
-    this.state = {place:{}, locations:locations, capacity: ["42"]}
+    this.state = {place:{}, locations:locations, colors: ['red', '#FFD700', '#1E90FF'], capacity: [42, 10, 90, 75, 32, 46, 2]}
   }
   
   openSearchModal() {
@@ -58,15 +58,15 @@ export default class App extends Component {
 
   render(){
     if (this.state.place.latitude != undefined) { //FIRST ENSURE THAT LATITUDE IS NOT UNDEFINED, set state happens asynchronously
-    return(
+    return( //here, before the return, put like your calculation of all the distances and stuff
       // CURRENT WORKING ONE WITH CURRENT LOCATION POSSIBLE
         <View style = {styles.container}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             //style={styles.button}
             onPress={() => this.getCurrentLocation()} //Potential for reset button if user has moved
           >
             <Text style = {{marginTop: 40, padding: 30}}>Pick a Place</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
         {this.state.place.latitude != undefined && 
         <MapView
@@ -75,97 +75,41 @@ export default class App extends Component {
         initialRegion = {{ //Current Location: UCLA
           latitude: 34.069905,//this.state.place.latitude,//40.649238,
           longitude: -118.445275,//this.state.place.longitude,//-73.986581,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
+          latitudeDelta: 0.03, //controls how zoomed in the view is when loaded
+          longitudeDelta: 0.02
         }}
         >
         {
           this.state.locations.map(marker => (
             <Marker
             key = {marker.title}
+            
             coordinate = {{latitude: marker.latitude,
               longitude: marker.longitude}}
               title = {marker.title}
+              identifier = {marker.identifier}
             >
-              <CustomMarker item = {marker}/>
-             <Text style = {styles.capacityText}>{this.state.capacity[0]}</Text>
-             
-             </Marker>
+            <CustomMarker item = {marker}/>
+          { this.state.capacity[marker.identifier] > 70 &&
+            <Text style = {styles.capacityTextFull}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
+          }
+
+          { this.state.capacity[marker.identifier] <= 70 && this.state.capacity[marker.identifier] > 40 &&
+            <Text style = {styles.capacityTextMedium}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
+          }
+
+          { this.state.capacity[marker.identifier] <= 40 &&
+            <Text style = {styles.capacityTextEmpty}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
+          }
+            <Text style = {styles.locationName}>{marker.title}</Text>
+            </Marker>
           ))
         }
         </MapView>
       }
+      {/* <Text style = {{marginTop: 40, padding: 30}}>bruh</Text> make test value overlap the map*/} 
       </View>
 
-      //IN PROGRESS
-      // <View style = {styles.container}>
-      //   <TouchableOpacity
-      //     //style={styles.button}
-      //     onPress={() => this.getCurrentLocation()} //Potential for reset button if user has moved
-      //   >
-      //     <Text style = {{marginTop: 40, padding: 30}}>Pick a Place</Text>
-      //   </TouchableOpacity>
-        
-
-      //   {/* {this.state.place.latitude !== undefined &&  */}
-      //   <MapView
-      //   provider = {PROVIDER_GOOGLE}
-      //   style = {styles.map}
-        
-
-      //   initialRegion={{latitude: this.state.place.latitude, longitude: this.state.place.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421}}
-      //   //console.log(this.state.place.longitude);
-      //   //initialRegion=
-      //   // {{
-      //   //   latitude: 40.649238,
-      //   //   longitude: -73.986581,
-      //   //   latitudeDelta: 0.0922,
-      //   //   longitudeDelta: 0.0421
-      //   // }} //something wrong with the state place, if having trouble set to default location instead
-        
-      //   >
-      //   {
-      //     this.state.locations.map(marker => (
-      //       <Marker
-      //       key = {marker.title}
-      //       coordinate = {{latitude: marker.latitude,
-      //         longitude: marker.longitude}}
-      //       >
-      //       {/* <CustomMarker item = {marker}/>
-      //       <Text>{this.state.titleText}</Text> */}
-      //       </Marker>
-      //     ))
-      //   } 
-      //   </MapView>}
-
-        
-      //   {/* {this.state.place.latitude === undefined &&<MapView
-      //   provider = {PROVIDER_GOOGLE}
-      //   style = {styles.map}
-
-      //   //initialRegion={this.state.place.latitude != undefined ? //{latitude: this.state.place.latitude, longitude: this.state.place.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421}
-      //   //{latitude: 37.785834, longitude: -122.406417, latitudeDelta: 0.0922, longitudeDelta: 0.0421}
-      //   initialRegion= {{
-      //     latitude: 40.649238,
-      //     longitude: -73.986581,
-      //     latitudeDelta: 0.0922,
-      //     longitudeDelta: 0.0421
-      //   }} //something wrong with the state place, if having trouble set to default location instead
-      //   >
-      //   { {
-      //     this.state.locations.map(marker => (
-      //       <Marker
-      //       key = {marker.title}
-      //       coordinate = {{latitude: marker.latitude,
-      //         longitude: marker.longitude}}
-      //       >
-      //       <CustomMarker item = {marker}/>
-      //       <Text>{this.state.titleText}</Text>
-      //       </Marker>
-      //     ))
-      //   }  }
-      //   </MapView>} */}
-      // </View>
     ) }
     else {
       return (null);
@@ -181,10 +125,27 @@ const styles = StyleSheet.create({
   map:{
     flex: 1
   },
-  capacityText:{
+  capacityTextFull:{
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 14,
-    
+    color: 'red'
+  },
+  capacityTextMedium:{
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14,
+    color: '#e6ac00'
+  },
+  capacityTextEmpty:{
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14,
+    color: '#1E90FF'
+  },
+  locationName:{
+    textAlign: 'center',
+    fontSize: 12,
   }
+
 })
