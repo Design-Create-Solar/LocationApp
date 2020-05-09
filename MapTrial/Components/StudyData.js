@@ -52,7 +52,7 @@ export const locations =
         title: 'Sproul', latitude: 34.071609,
         longitude: -118.450041,
         identifier: '6',
-        markerImage: "https://fastly.4sqi.net/img/general/600x600/77961554_YgQ6SPlQbNkySgEAOHvYeeDlJM3RaecbyomQa44_dxc.jpg",
+        markerImage: "https://dailybruin.com/images/2017/01/web.ns_.bplategarden.LU_.jpg",
         weight:13
     }
 ]

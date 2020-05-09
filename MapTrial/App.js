@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   View,
+  Button,
   Text,
   StatusBar, TouchableOpacity
 } from 'react-native';
@@ -37,7 +38,9 @@ class App extends React.Component {
   render()
   {
     return (
+      
       <NavigationContainer>
+        
       <Tab.Navigator
       tabBarOptions={{
         labelStyle: { fontSize: 16, height: 20 },
@@ -51,6 +54,7 @@ class App extends React.Component {
         <Tab.Screen name="Study" component={StudyScreen}/>
         <Tab.Screen name="Dining" component={DiningScreen} />
       </Tab.Navigator>
+      
     </NavigationContainer>
     );//<MapView></MapView>
   }
