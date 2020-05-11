@@ -27,7 +27,8 @@ import {
 
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps'
 
-import { locations } from './StudyData'
+import { locations as studylocations } from './StudyData'
+import { locations as dininglocations } from './DiningData'
 import RNGooglePlaces from 'react-native-google-places';
 import Geolocation from '@react-native-community/geolocation';
 import CustomMarker from './CustomMarkers'
@@ -42,7 +43,8 @@ export default class App extends Component {
   constructor (props)
   {
     super(props)
-    this.state = {place:{}, locations:locations, capacity: [42, 60, 90, 75, 32, 46, 40]}
+    console.log(props)
+    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations , capacity: [42, 60, 90, 75, 32, 46, 40]}
   }
   
   openSearchModal() {
@@ -60,8 +62,8 @@ export default class App extends Component {
   preferenceOptimize() { //Find out which is the most optimal study location
     var distanceWeight = 100; //Alter these weights based on what preference you have over the other
     var busyWeight = 2; //Think about: what if people preferred a less busy one, dont care about distance?
-    var deltaLat = Math.abs(this.state.place.latitude - locations[0].latitude);
-    var deltaLong = Math.abs(this.state.place.longitude - locations[0].longitude);
+    var deltaLat = Math.abs(this.state.place.latitude - this.state.locations[0].latitude);
+    var deltaLong = Math.abs(this.state.place.longitude - this.state.locations[0].longitude);
     var latSide = Math.pow(deltaLat, 2);
     var longSide = Math.pow(deltaLong, 2);
     var distance = Math.sqrt(latSide + longSide);
@@ -70,8 +72,8 @@ export default class App extends Component {
     var leastIndex = 0;
     for (let i = 1; i < 7; i++)
     {
-      deltaLat = Math.abs(this.state.place.latitude - locations[i].latitude);
-      deltaLong = Math.abs(this.state.place.longitude - locations[i].longitude);
+      deltaLat = Math.abs(this.state.place.latitude - this.state.locations[i].latitude);
+      deltaLong = Math.abs(this.state.place.longitude - this.state.locations[i].longitude);
       latSide = Math.pow(deltaLat, 2);
       longSide = Math.pow(deltaLong, 2);
       distance = Math.sqrt(latSide + longSide);
@@ -91,7 +93,7 @@ export default class App extends Component {
       // CURRENT WORKING ONE WITH CURRENT LOCATION POSSIBLE
         <View style = {styles.container}>
           
-        <Text style = {styles.optimalLocation}>CLOSEST/LEAST BUSY: {locations[this.preferenceOptimize()].title}</Text>
+        <Text style = {styles.optimalLocation}>CLOSEST/LEAST BUSY: {this.state.locations[this.preferenceOptimize()].title}</Text>
 
         {this.state.place.latitude != undefined && 
         <MapView
@@ -115,7 +117,7 @@ export default class App extends Component {
               identifier = {marker.identifier}
             >
             <CustomMarker item = {marker}/>
-          { this.state.capacity[marker.identifier] > 70 &&
+          {/* { this.state.capacity[marker.identifier] > 70 &&
             <Text style = {styles.capacityTextFull}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
           }
 
@@ -125,7 +127,7 @@ export default class App extends Component {
 
           { this.state.capacity[marker.identifier] <= 40 &&
             <Text style = {styles.capacityTextEmpty}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
-          }
+          } */}
             <Text style = {styles.locationName}>{marker.title}</Text>
             </Marker>
           ))
@@ -154,24 +156,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center'
   },
-  capacityTextFull:{
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 14,
-    color: 'red'
-  },
-  capacityTextMedium:{
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 14,
-    color: '#e6ac00'
-  },
-  capacityTextEmpty:{
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 14,
-    color: '#1E90FF'
-  },
+  
   locationName:{
     textAlign: 'center',
     fontSize: 12,

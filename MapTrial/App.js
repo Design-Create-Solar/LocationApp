@@ -10,7 +10,6 @@ import {
   StatusBar, TouchableOpacity
 } from 'react-native';
 import MapView from './Components/MapView'
-import DiningView from './Components/DiningView'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -19,16 +18,15 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 function StudyScreen() {
   return (
-    <MapView></MapView>
+    <MapView mode="Study"></MapView>
   );
 }
 
 function DiningScreen() {
   return (
-    <DiningView></DiningView>
+    <MapView mode="Dining"></MapView>
   );
 }
-
 
 const Stack = createStackNavigator();
 //const Tab = createBottomTabNavigator();
