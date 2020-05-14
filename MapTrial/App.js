@@ -38,7 +38,6 @@ class App extends React.Component {
     return (
       
       <NavigationContainer>
-        
       <Tab.Navigator
       tabBarOptions={{
         labelStyle: { fontSize: 16, height: 20 },
