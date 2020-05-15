@@ -12,9 +12,7 @@ import {
 import MapView from './Components/MapView'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 function StudyScreen() {
   return (
@@ -36,7 +34,6 @@ class App extends React.Component {
   render()
   {
     return (
-      
       <NavigationContainer>
       <Tab.Navigator
       tabBarOptions={{

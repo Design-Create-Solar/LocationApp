@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, { Component } from 'react';
 import {
   SafeAreaView,
@@ -13,6 +5,7 @@ import {
   ScrollView,
   View,
   Text,
+  Image,
   Button,
   StatusBar, TouchableOpacity
 } from 'react-native';
@@ -32,85 +25,6 @@ import { locations as dininglocations } from './DiningData'
 import RNGooglePlaces from 'react-native-google-places';
 import Geolocation from '@react-native-community/geolocation';
 import CustomMarker from './CustomMarkers'
-import axios from 'axios'
-
-
-async function getCapacity(name, address){
-  let result = await axios ({ //for LIVE DATA
-      method: 'post',
-      url:'https://besttime.app/api/v1/forecasts/live?',
-      params: {
-        api_key_private:'pri_a02d3d2435574495bf1003d6ba88491f',
-        venue_name: name,
-        venue_address: address,
-      }
-  }).then(res => {
-      console.log(res)
-      if (res.data.status != 'Error') {
-        console.log(res.data.analysis.venue_live_busyness); //can be deleted after
-        return(Number(res.data.analysis.venue_live_busyness));
-      }
-  });
-
-  var dayNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];//further abbreviated to alleviate misconceptions of Json spellings
-  //console.log(dayNames.indexOf('Mo'));
-  result = await axios ({ //for FORECASTS
-    method: 'post',
-    url:'https://besttime.app/api/v1/forecasts?', 
-    params: {
-      api_key_private:'pri_a02d3d2435574495bf1003d6ba88491f',
-      venue_name: name,
-      venue_address: address,
-    }
-  }).then(res => {
-    console.log(res)
-    if (res.data.status != 'error' && res.data.status != 'Error') {
-      var dateTime = res.headers.date;
-      var day;
-      var dayNum;
-      var hour;
-      var dayReverse = 0;
-      var iterator = 0;
-      while (dateTime.substring(iterator, iterator + 1) != ':') {
-        iterator++;
-      }
-      hour = Number(dateTime.substring(iterator-2, iterator));
-      
-      hour = hour - 7;
-      if (hour < 0) {
-        hour = 24 + hour; //accounting for timezone
-        dayReverse = 1;
-      }
-
-      var trueHour; //According to the hour_analysis json
-      trueHour = hour - 6;
-      if (trueHour < 0) {
-        trueHour = 24 + trueHour;
-      }
-
-      //console.log(hour)
-      day = dateTime.substring(0, 2)
-      if (dayReverse = 1) {
-        dayNum = dayNames.indexOf(day) - 1;
-        if (dayNum == -1) {
-          dayNum = 6;
-        }
-      }
-      else {
-        dayNum = dayNames.indexOf(day)
-      }
-      //console.log(dayNum)
-      //console.log(res.data.analysis[dayNum].hour_analysis[trueHour].intensity_txt)
-      return(String(res.data.analysis[dayNum].hour_analysis[trueHour]));
-    }
-    else {
-      return(Number(-1));
-    }
-  });
-
-  
-}
-
 
 export default class App extends Component {
   getCurrentLocation(){
@@ -123,7 +37,7 @@ export default class App extends Component {
   {
     super(props)
     console.log(props)
-    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations , capacity: [42, 60, 90, 75, 32, 46, 40]}
+    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations}
   }
   
   openSearchModal() {
@@ -139,15 +53,15 @@ export default class App extends Component {
   }
 
   preferenceOptimize() { //Find out which is the most optimal study location
-    var distanceWeight = 100; //Alter these weights based on what preference you have over the other
-    var busyWeight = 2; //Think about: what if people preferred a less busy one, dont care about distance?
+    var distanceWeight = 20; //Alter these weights based on what preference you have over the other
+    var busyWeight = 40; //Think about: what if people preferred a less busy one, dont care about distance?
     var deltaLat = Math.abs(this.state.place.latitude - this.state.locations[0].latitude);
     var deltaLong = Math.abs(this.state.place.longitude - this.state.locations[0].longitude);
     var latSide = Math.pow(deltaLat, 2);
     var longSide = Math.pow(deltaLong, 2);
     var distance = Math.sqrt(latSide + longSide);
 
-    var least = this.state.capacity[0]*busyWeight + distance*distanceWeight;
+    var least = Number(this.state.locations[0].capacityQuant)*busyWeight + distance*distanceWeight;
     var leastIndex = 0;
     for (let i = 1; i < 7; i++)
     {
@@ -157,9 +71,9 @@ export default class App extends Component {
       longSide = Math.pow(deltaLong, 2);
       distance = Math.sqrt(latSide + longSide);
 
-      if (this.state.capacity[i]*busyWeight + distance*distanceWeight <= least)
+      if (Number(this.state.locations[i].capacityQuant)*busyWeight + distance*distanceWeight <= least)
       {
-        least = this.state.capacity[i]*busyWeight + distance*distanceWeight;
+        least = Number(this.state.locations[i].capacityQuant)*busyWeight + distance*distanceWeight;
         leastIndex = i;
       }
     }
@@ -170,10 +84,10 @@ export default class App extends Component {
     if (this.state.place.latitude != undefined) { //FIRST ENSURE THAT LATITUDE IS NOT UNDEFINED, set state happens asynchronously
     return( //here, before the return, put like your calculation of all the distances and stuff
       // CURRENT WORKING ONE WITH CURRENT LOCATION POSSIBLE
-      
+
         <View style = {styles.container}>
-          
         <Text style = {styles.optimalLocation}>CLOSEST/LEAST BUSY: {this.state.locations[this.preferenceOptimize()].title}</Text>
+        
 
         {this.state.place.latitude != undefined && 
         <MapView
@@ -197,23 +111,17 @@ export default class App extends Component {
               identifier = {marker.identifier}
             >
             <CustomMarker item = {marker}/>
-          {/* { this.state.capacity[marker.identifier] > 70 &&
-            <Text style = {styles.capacityTextFull}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
-          }
-
-          { this.state.capacity[marker.identifier] <= 70 && this.state.capacity[marker.identifier] > 40 &&
-            <Text style = {styles.capacityTextMedium}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
-          }
-
-          { this.state.capacity[marker.identifier] <= 40 &&
-            <Text style = {styles.capacityTextEmpty}>{this.state.capacity[Number(marker.identifier)].toString()}</Text> 
-          } */}
+            {/* <View style = {styles.roundMarker}>
+            <Image style = {styles.roundImage} source = {{uri: marker.markerImage}}/>
+            
+            </View> */}
             <Text style = {styles.locationName}>{marker.title}</Text>
             </Marker>
           ))
         }
         </MapView>
       }
+      
       </View>
 
     ) }
