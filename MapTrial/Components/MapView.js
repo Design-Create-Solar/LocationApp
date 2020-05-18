@@ -6,9 +6,13 @@ import {
   View,
   Text,
   Image,
-  Button,
+  Switch,
+  Animated,
+  Linking,
   StatusBar, TouchableOpacity
 } from 'react-native';
+
+import { Button } from 'react-native-elements';
 
 import {
   Header,
@@ -26,7 +30,11 @@ import RNGooglePlaces from 'react-native-google-places';
 import Geolocation from '@react-native-community/geolocation';
 import CustomMarker from './CustomMarkers'
 
+const AnimatedButton = Animated.createAnimatedComponent(TouchableOpacity);
+
+
 export default class App extends Component {
+  
   getCurrentLocation(){
     Geolocation.getCurrentPosition(info => //console.log(info)
       this.setState({place:{latitude:34.069905, longitude:-118.445275}})//info.coords.latitude, longitude:info.coords.longitude}}) //set this to default UCLA values for testing
@@ -37,7 +45,7 @@ export default class App extends Component {
   {
     super(props)
     console.log(props)
-    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations}
+    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations, optimal: 0, viewState: 'hill'}
   }
   
   openSearchModal() {
@@ -50,6 +58,7 @@ export default class App extends Component {
 
   componentDidMount() { //Before rendering, ensures data is available
     this.getCurrentLocation();
+    //this.setState({optimal: this.preferenceOptimize()})
   }
 
   preferenceOptimize() { //Find out which is the most optimal study location
@@ -60,10 +69,21 @@ export default class App extends Component {
     var latSide = Math.pow(deltaLat, 2);
     var longSide = Math.pow(deltaLong, 2);
     var distance = Math.sqrt(latSide + longSide);
-
-    var least = Number(this.state.locations[0].capacityQuant)*busyWeight + distance*distanceWeight;
-    var leastIndex = 0;
-    for (let i = 1; i < 7; i++)
+    let i = 1;
+    let j = 0;
+    while (this.state.locations[j].capacityQuant == 10000000 && j < 7) {
+      j++;
+      i++;
+      console.log(i)
+      console.log(j)
+    }
+    // if (j == 7)
+    // {
+    //   return something
+    // } //think of some terminating condition if all are closed
+    var least = Number(this.state.locations[j].capacityQuant)*busyWeight + distance*distanceWeight;
+    var leastIndex = j;
+    for (; i < 7; i++)
     {
       deltaLat = Math.abs(this.state.place.latitude - this.state.locations[i].latitude);
       deltaLong = Math.abs(this.state.place.longitude - this.state.locations[i].longitude);
@@ -73,6 +93,10 @@ export default class App extends Component {
 
       if (Number(this.state.locations[i].capacityQuant)*busyWeight + distance*distanceWeight <= least)
       {
+        if (this.state.locations[i].capacity == 'Closed' || this.state.locations[i].capacity == 'Unav.')
+        {
+          continue;
+        }
         least = Number(this.state.locations[i].capacityQuant)*busyWeight + distance*distanceWeight;
         leastIndex = i;
       }
@@ -80,19 +104,55 @@ export default class App extends Component {
     return leastIndex;
   }
 
+  // function App() {
+  //   const [isEnabled, setIsEnabled] = useState(false);
+  //   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  animate(){
+    let r;
+    if (this.state.viewState == 'campus') {
+      r = { //on the hill
+          latitude: 34.072885,
+          longitude: -118.451047,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.005,
+      };
+      this.setState({viewState: 'hill'})
+    }
+    else if (this.state.viewState == 'hill') {
+      r = { //on campus
+        latitude: 34.072411, 
+        longitude: -118.441096,
+        latitudeDelta: 0.007,
+        longitudeDelta: 0.007,
+     };
+     this.setState({viewState: 'campus'})
+    }
+    this.mapView.animateToRegion(r, 200); //second parameter defines speed 
+  }
+
+  // animButton() {
+  //   const backgroundColor = this.state.backgroundColor.interpolate({
+  //     inputRange: [0, 1],
+  //     outputRange: ['rgba(89, 77, 70, 1)', 'rgba(63, 104, 28, 1)']
+  //   });
+  // }
+
   render(){
+    
+    // const [isEnabled, setIsEnabled] = React.useState(false);
+    // const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     if (this.state.place.latitude != undefined) { //FIRST ENSURE THAT LATITUDE IS NOT UNDEFINED, set state happens asynchronously
     return( //here, before the return, put like your calculation of all the distances and stuff
       // CURRENT WORKING ONE WITH CURRENT LOCATION POSSIBLE
-
         <View style = {styles.container}>
-        <Text style = {styles.optimalLocation}>CLOSEST/LEAST BUSY: {this.state.locations[this.preferenceOptimize()].title}</Text>
+        <Text style = {styles.optimalLocation}>CLOSEST/LEAST BUSY: {this.state.locations[Number(this.state.optimal)].title}</Text>
+        <Text style = {styles.optimalLocation}>Press Images for Room Reservations/Menus</Text>
         
-
         {this.state.place.latitude != undefined && 
         <MapView
         provider = {PROVIDER_GOOGLE}
         style = {styles.map}
+        ref = {(ref)=>this.mapView=ref}
         initialRegion = {{ //Current Location: UCLA
           latitude: this.state.place.latitude,//40.649238,
           longitude: this.state.place.longitude,//-73.986581,
@@ -100,9 +160,15 @@ export default class App extends Component {
           longitudeDelta: 0.02
         }}
         >
+        
         {
           this.state.locations.map(marker => (
             <Marker
+            onPress = {() => 
+              {if (marker.website != "") {
+                 Linking.openURL(marker.website);
+              }}
+            }
             key = {marker.title}
             
             coordinate = {{latitude: marker.latitude,
@@ -111,19 +177,22 @@ export default class App extends Component {
               identifier = {marker.identifier}
             >
             <CustomMarker item = {marker}/>
-            {/* <View style = {styles.roundMarker}>
-            <Image style = {styles.roundImage} source = {{uri: marker.markerImage}}/>
-            
-            </View> */}
             <Text style = {styles.locationName}>{marker.title}</Text>
+            
             </Marker>
           ))
-        }
+        } 
         </MapView>
       }
       
+      {/* <AnimatedButton
+    style={[styles.container, { backgroundColor }]}
+    onPress={() => this.animate('campus')}>
+      <Text>nice</Text>
+      </AnimatedButton> */}
+      <Button title = 'ON CAMPUS | ON THE HILL' onPress={()=>this.animate()}/>
+      <Text style = {styles.bottomSpace}></Text>
       </View>
-
     ) }
     else {
       return (null);
@@ -134,13 +203,28 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+  },
+  switchText: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    color: 'black',
+    fontWeight: 'bold'
+  },
+  switchComp: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: 20,
+    backgroundColor: 'transparent',
+    opacity: 1
+  },
+  bottomSpace: {
+    backgroundColor: 'rgba(0, 0, 0, 0.6)'
   },
   map:{
     flex: 1
   },
   optimalLocation:{
-    backgroundColor: 'gold',
+    backgroundColor: 'white',
     fontWeight: 'bold',
     textAlign: 'center'
   },
@@ -148,6 +232,6 @@ const styles = StyleSheet.create({
   locationName:{
     textAlign: 'center',
     fontSize: 12,
+    backgroundColor: 'rgb(250,250,210)'
   }
-
 })

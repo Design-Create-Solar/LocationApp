@@ -25,12 +25,11 @@ async function getCapacity(name, address){
       method: 'post',
       url:'https://besttime.app/api/v1/forecasts?', 
       params: {
-        api_key_private:'pri_e455ca9355b94b4283568d2d6b3f5545',
+        api_key_private:'pri_d6be877c1cdd490fb77b53f67bcfa4df',
         venue_name: name,
         venue_address: address,
       }
     }).then(res => {
-      console.log(res)
       if (res.data.status != 'error' && res.data.status != 'Error') {
         var dateTime = res.headers.date;
         var day;
@@ -78,9 +77,9 @@ async function getCapacity(name, address){
   }
 //maybe add the word async before item? don't quite know
 const CustomMarker = ({item}) => {
-    const [capacity,setCapacity] = React.useState(item.capacity)
-    getCapacity(item.fullname, item.address).then(res => {item.capacity = res; setCapacity(res); console.log(res)}); 
-    item.capacity = capacity;
+    // const [capacity,setCapacity] = React.useState(item.capacity) //necessary since rerendering only happens when there is a change of state
+    // getCapacity(item.fullname, item.address).then(res => {item.capacity = res; setCapacity(res)}); 
+    // item.capacity = capacity;
 
     if (item.capacity == -1 || item.capacity == 'Closed')
     {item.capacityQuant = 10000000;}
@@ -94,7 +93,6 @@ const CustomMarker = ({item}) => {
     {item.capacityQuant = 40;}
     else if (item.capacity == 'Low')
     {item.capacityQuant = 20;}
-    console.log(item.capacityQuant)
     
     return (
         <View>
