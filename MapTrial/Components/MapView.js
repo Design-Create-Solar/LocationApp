@@ -45,7 +45,7 @@ export default class App extends Component {
   {
     super(props)
     console.log(props)
-    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations, optimal: 0, viewState: 'hill'}
+    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations, optimal: 0, viewState: 'hill', currView: props.mode}
   }
   
   openSearchModal() {
@@ -104,10 +104,8 @@ export default class App extends Component {
     return leastIndex;
   }
 
-  // function App() {
-  //   const [isEnabled, setIsEnabled] = useState(false);
-  //   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  animate(){
+
+  animateCampHill(){
     let r;
     if (this.state.viewState == 'campus') {
       r = { //on the hill
@@ -123,19 +121,23 @@ export default class App extends Component {
         latitude: 34.072411, 
         longitude: -118.441096,
         latitudeDelta: 0.007,
-        longitudeDelta: 0.007,
+        longitudeDelta: 0.01,
      };
      this.setState({viewState: 'campus'})
     }
-    this.mapView.animateToRegion(r, 200); //second parameter defines speed 
+    this.mapView.animateToRegion(r, 500); //second parameter defines speed 
   }
 
-  // animButton() {
-  //   const backgroundColor = this.state.backgroundColor.interpolate({
-  //     inputRange: [0, 1],
-  //     outputRange: ['rgba(89, 77, 70, 1)', 'rgba(63, 104, 28, 1)']
-  //   });
-  // }
+  animateAck(){
+    let r;
+    r = {
+        latitude: 34.070402, 
+        longitude: -118.444242,
+        latitudeDelta: 0.0007,
+        longitudeDelta: 0.0009,
+     };
+    this.mapView.animateToRegion(r, 500); //second parameter defines speed 
+  }
 
   render(){
     
@@ -190,7 +192,10 @@ export default class App extends Component {
     onPress={() => this.animate('campus')}>
       <Text>nice</Text>
       </AnimatedButton> */}
-      <Button title = 'ON CAMPUS | ON THE HILL' onPress={()=>this.animate()}/>
+      {this.state.currView == 'Dining' &&
+      <Button type = 'outline' title = 'ZOOM - ACKERMAN' onPress={()=>this.animateAck()}/>
+      }
+      <Button title = 'ON CAMPUS | ON THE HILL' onPress={()=>this.animateCampHill()}/>
       <Text style = {styles.bottomSpace}></Text>
       </View>
     ) }

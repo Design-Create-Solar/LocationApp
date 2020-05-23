@@ -154,5 +154,42 @@ export const locations =
         markerImage: "https://i.pinimg.com/originals/b7/e8/7b/b7e87b62b2f5de325aab0d72916294fa.jpg",
         website: "https://asucla.ucla.edu/where-to-eat/#1457973050769-0d011763-5c87",
         weight:13
-    } // simply continue adding ACKERMAN NEXT
+    },
+    //ACKERMAN
+
+    {
+        title: 'Gr.House', latitude: 34.070388, 
+        longitude: -118.444226,
+        fullname: 'Greenhouse',
+        address: 'Ackerman, AU-1390B, 308 Westwood Plaza, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/7Fo-Kl_0drun6X1NSArOGw/348s.jpg",
+        website: "https://www.yelp.com/biz/the-greenhouse-los-angeles",
+        weight:13
+    },
+
+    {
+        title: 'Wetzel\'s', latitude: 34.070434, 
+        longitude: -118.444145,
+        fullname: 'Wetzel\'s Pretzels',
+        address: '308 Westwood Plaza, AU 1390B, Los Angeles, CA 90024',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://media-cdn.tripadvisor.com/media/photo-s/11/dd/72/f6/pic.jpg",
+        website: "https://www.wetzels.com/",
+        weight:13
+    },
+
+    {
+        title: 'Rubio\'s', latitude: 34.070388,  
+        longitude: -118.443998,
+        fullname: 'Rubio\'s',
+        address: 'Treehouse Food Court, 308 Westwood Plaza 1st floor, Los Angeles, CA 90024',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://wolfpackboosters.com/wp-content/uploads/2017/02/Rubios.jpg",
+        website: "https://www.rubios.com/",
+        weight:13
+    },
 ]
