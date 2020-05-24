@@ -189,7 +189,91 @@ export const locations =
         capacity: -1,
         capacityQuant: -1,
         markerImage: "https://wolfpackboosters.com/wp-content/uploads/2017/02/Rubios.jpg",
-        website: "https://www.rubios.com/",
+        website: "https://www.rubios.com/#block-bean-our-menu",
         weight:13
     },
+
+    {
+        title: 'Wolfgang', latitude: 34.070387, 
+        longitude: -118.444207,
+        fullname: 'Wolfgang Puck Express',
+        address: 'Ackerman Union, 308 Westwood Plaza level 1, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://dailybruin.com/images/2013/09/ef3af866-17e2-4b40-a51c-09110f2c5931.jpg",
+        website: "https://wolfgangpuck.com/dining/wolfgang-puck-express-los-angeles/",
+        weight:13
+    },
+
+    {
+        title: 'Panda', latitude: 34.070488, 
+        longitude: -118.444023,
+        fullname: 'Panda Express',
+        address: '308 Westwood Plaza, Los Angeles, CA',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://maps.ucla.edu/photos/locations/large/L83773_201203151334.jpg",
+        website: "https://www.pandaexpress.com/menu",
+        weight:13
+    },
+
+    {
+        title: 'Sweetspot', latitude: 34.070389, 
+        longitude: -118.444224,
+        fullname: 'Sweetspot',
+        address: '308 Westwood Plaza, Ackerman Level 1, AU-1390B, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/an86vECSTWN-aHSqi66mlQ/300s.jpg",
+        website: "https://www.yelp.com/biz/sweetspot-los-angeles",
+        weight:13
+    },
+
+    {
+        title: 'Lollicup', latitude: 34.070425, 
+        longitude: -118.444142,
+        fullname: 'Lollicup Fresh',
+        address: 'Ackerman Union, Westwood Plaza, Los Angeles, CA 90095',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://img.grouponcdn.com/deal/2Fd1WKu43Nj7FFiZAC4PjmYvtXEa/2F-2048x1227/v1/c700x420.jpg",
+        website: "https://www.lollicupfresh.com/menu",
+        weight:13
+    },
+
+    {
+        title: 'Veggie', latitude: 34.070424, 
+        longitude: -118.444142,
+        fullname: 'Veggie Grill',
+        address: '308 Westwood Plaza Ackerman Student Union, Level 1, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://d3vhp0ldxntuok.cloudfront.net/image/1089/b10/0.5,0.5/small",
+        website: "https://www.veggiegrill.com/menu.html",
+        weight:13
+    },
+
+    {
+        title: 'Taco Bell', latitude: 34.070385, 
+        longitude: -118.444203,
+        fullname: 'Taco Bell',
+        address: 'Ackerman A, 308 Westwood Plaza #245c, Los Angeles, CA 90095',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://www.tacobell.com/medias/taco-bell-2020-DLT-02.jpg?context=bWFzdGVyfGltYWdlc3wxMjI0NjV8aW1hZ2UvanBlZ3xpbWFnZXMvaDA2L2hmNi84OTcwMjM0NTI3Nzc0LmpwZ3xmNTBkMDc3NTY3ZWU4NjAxYzk2ZDgxY2Y4YTBjZGRhZDg2ODYxMjNjYzZmZmM1ODk2Y2MxMTE3ZDMxMWNjODkw",
+        website: "https://www.tacobell.com/food",
+        weight:13
+    },
+
+    {
+        title: 'Taco Bell', latitude: 34.070385, 
+        longitude: -118.444203,
+        fullname: 'Taco Bell',
+        address: 'Ackerman A, 308 Westwood Plaza #245c, Los Angeles, CA 90095',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://www.tacobell.com/medias/taco-bell-2020-DLT-02.jpg?context=bWFzdGVyfGltYWdlc3wxMjI0NjV8aW1hZ2UvanBlZ3xpbWFnZXMvaDA2L2hmNi84OTcwMjM0NTI3Nzc0LmpwZ3xmNTBkMDc3NTY3ZWU4NjAxYzk2ZDgxY2Y4YTBjZGRhZDg2ODYxMjNjYzZmZmM1ODk2Y2MxMTE3ZDMxMWNjODkw",
+        website: "https://www.tacobell.com/food",
+        weight:13
+    } //finish from Bruin Buzz
 ]
