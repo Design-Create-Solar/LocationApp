@@ -340,4 +340,88 @@ export const locations =
     },
     
     //MUSIC CAFE
+
+    {
+        title: 'Music Ca.', latitude: 34.070274,      
+        longitude: -118.440374,
+        fullname: 'Evelyn & Mo Ostin Music Café',
+        address: '460 Portola Plaza, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://2.bp.blogspot.com/-nmlFDmG0f_c/VVWMmm3eR-I/AAAAAAAAEYA/ZdFaIdz9zwM/s1600/STSS%2BSpring%2BAdventure%2B2015-%2BUCLA%2BMusic%2BCenter%2BCafe.jpg",
+        website: "https://www.yelp.com/biz/evelyn-and-mo-ostin-music-caf%C3%A9-los-angeles",
+        weight:13
+    },
+
+    {
+        title: 'Synapse', latitude: 34.067338,      
+        longitude: -118.444716,
+        fullname: 'Cafe Synapse',
+        address: 'Charles E Young Dr S, Los Angeles, CA',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://fastly.4sqi.net/img/general/600x600/54658772_NOr23y8uNnRSruQ1hBDTLQ5pqzX2Aet8aGnWZDmdhqA.jpg",
+        website: "https://www.yelp.com/biz/caf%C3%A9-synapse-los-angeles-2",
+        weight:13
+    },
+
+    {
+        title: 'Blaze', latitude: 34.068135,      
+        longitude: -118.442133,
+        fullname: 'Blaze Pizza',
+        address: '617 Charles E Young Dr N E, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://www.pasadenastarnews.com/wp-content/uploads/2019/01/PAS-L-BLAZE-0117-2-1.jpg",
+        website: "https://hq.blazepizza.com/menu/",
+        weight:13
+    },
+
+    {
+        title: 'Fusion', latitude: 34.068191,       
+        longitude: -118.442111,
+        fullname: 'Fusion',
+        address: '617 Charles E Young Dr E, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://dailybruin.com/images/47646_web.ae.3.7.scsc.preview.picao.jpg",
+        website: "https://www.yelp.com/biz/fusion-los-angeles",
+        weight:13
+    },
+
+    {
+        title: 'S. Lights', latitude: 34.068339,        
+        longitude: -118.442367,
+        fullname: 'Southern Lights',
+        address: '617 Charles E Young Dr E, Los Angeles',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/w21-X929mcLzLRIrIPxKbg/348s.jpg",
+        website: "https://www.yelp.com/biz/southern-lights-los-angeles",
+        weight:13
+    },
+
+    {
+        title: 'Subway', latitude: 34.068275,        
+        longitude: -118.442247,
+        fullname: 'Subway',
+        address: '617 Charles Young Drive East Court of Sciences Student Cntr',
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/news-image/subway-partners-feeding-america-world-sandwich-day_0.jpg?itok=fPw59XRy",
+        website: "https://www.subway.com/en-US/MenuNutrition/Menu",
+        weight:13
+    },
+
+    {
+        title: 'Yoshinoya', latitude: 34.0683,         
+        longitude: -118.442109,
+        fullname: 'Yoshinoya',
+        address: '617 Charles E Young Dr E, Los Angeles', //synthetic
+        capacity: -1,
+        capacityQuant: -1,
+        markerImage: "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ilXTu7bUFcU0/v0/1000x-1.jpg",
+        website: "https://www.yoshinoyaamerica.com/our-menu",
+        weight:13
+    },
 ]

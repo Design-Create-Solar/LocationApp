@@ -45,7 +45,7 @@ export default class App extends Component {
   {
     super(props)
     console.log(props)
-    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations, optimal: 0, viewState: 'hill', currView: props.mode}
+    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations, optimal: 0, viewState: 'hill', dineState: 'ack', currView: props.mode}
   }
   
   openSearchModal() {
@@ -128,14 +128,27 @@ export default class App extends Component {
     this.mapView.animateToRegion(r, 500); //second parameter defines speed 
   }
 
-  animateAck(){
+  animateAckBomb(){
     let r;
-    r = {
-        latitude: 34.070402, 
-        longitude: -118.444242,
-        latitudeDelta: 0.0007,
-        longitudeDelta: 0.0009,
-     };
+    if (this.state.dineState == 'bo') {
+      r = {
+          latitude: 34.0705, 
+          longitude: -118.44422,
+          latitudeDelta: 0.0004,
+          longitudeDelta: 0.0003,
+      };
+      this.setState({dineState: 'ack'})
+    }
+
+    else if (this.state.dineState == 'ack') {
+      r = {
+        latitude: 34.0683,  
+        longitude: -118.44225,
+        latitudeDelta: 0.0002,
+        longitudeDelta: 0.0004,
+      };
+      this.setState({dineState: 'bo'})
+    }
     this.mapView.animateToRegion(r, 500); //second parameter defines speed 
   }
 
@@ -193,7 +206,7 @@ export default class App extends Component {
       <Text>nice</Text>
       </AnimatedButton> */}
       {this.state.currView == 'Dining' &&
-      <Button type = 'outline' title = 'ZOOM - ACKERMAN' onPress={()=>this.animateAck()}/>
+      <Button type = 'outline' title = 'ZOOM - ACKERMAN | BOMBSHELTER' onPress={()=>this.animateAckBomb()}/>
       }
       <Button title = 'ON CAMPUS | ON THE HILL' onPress={()=>this.animateCampHill()}/>
       <Text style = {styles.bottomSpace}></Text>
