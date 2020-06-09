@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
+  Platform,
   Image,
   Switch,
   Animated,
@@ -13,6 +14,7 @@ import {
 } from 'react-native';
 
 import { Button } from 'react-native-elements';
+import SplashScreen from 'react-native-splash-screen'
 
 import {
   Header,
@@ -57,6 +59,7 @@ export default class App extends Component {
   }
 
   componentDidMount() { //Before rendering, ensures data is available
+    SplashScreen.hide();
     this.getCurrentLocation();
     //this.setState({optimal: this.preferenceOptimize()})
   }
@@ -200,11 +203,6 @@ export default class App extends Component {
         </MapView>
       }
       
-      {/* <AnimatedButton
-    style={[styles.container, { backgroundColor }]}
-    onPress={() => this.animate('campus')}>
-      <Text>nice</Text>
-      </AnimatedButton> */}
       {this.state.currView == 'Dining' &&
       <Button type = 'outline' title = 'ZOOM - ACKERMAN | BOMBSHELTER' onPress={()=>this.animateAckBomb()}/>
       }
