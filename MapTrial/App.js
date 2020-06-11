@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,6 +13,7 @@ import MapView from './Components/MapView'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import SplashScreen from 'react-native-splash-screen'
 
 function StudyScreen() {
   return (
@@ -34,6 +35,7 @@ class App extends React.Component {
   render()
   {
     return (
+      
       <NavigationContainer>
       <Tab.Navigator
       tabBarOptions={{

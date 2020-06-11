@@ -203,6 +203,7 @@ export default class App extends Component {
         </MapView>
       }
       
+
       {this.state.currView == 'Dining' &&
       <Button type = 'outline' title = 'ZOOM - ACKERMAN | BOMBSHELTER' onPress={()=>this.animateAckBomb()}/>
       }
