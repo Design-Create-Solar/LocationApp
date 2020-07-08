@@ -25,9 +25,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps'
-
-import { locations as studylocations } from './StudyData'
-import { locations as dininglocations } from './DiningData'
+const studylocations = require("./StudyData");
+const dininglocations = require("./DiningData");
 import RNGooglePlaces from 'react-native-google-places';
 import Geolocation from '@react-native-community/geolocation';
 import CustomMarker from './CustomMarkers'
@@ -47,7 +46,7 @@ export default class App extends Component {
   {
     super(props)
     console.log(props)
-    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations, optimal: 0, viewState: 'hill', dineState: 'ack', currView: props.mode}
+    this.state = {place:{}, locations:props.mode=="Study" ? studylocations:dininglocations, optimal: 0, viewState: 'hill', dineState: 'ack', currView: props.mode, preferenceStore: 0}
   }
   
   openSearchModal() {
@@ -65,6 +64,21 @@ export default class App extends Component {
   }
 
   preferenceOptimize() { //Find out which is the most optimal study location
+    let origCount = this.state.preferenceStore;
+    let count = 0;
+    if (this.state.preferenceStore != this.state.locations.length) {
+      for (let i = 0; i < this.state.locations.length; i++) {
+        if (this.state.locations[i].capacity != -2) {
+
+          console.log(this.state.locations[i].capacity)
+          console.log(this.state.locations.length)
+          count++;
+        }
+      }
+      if (origCount != count) {
+        this.setState({preferenceStore: count})
+      }
+    }
     var distanceWeight = 20; //Alter these weights based on what preference you have over the other
     var busyWeight = 40; //Think about: what if people preferred a less busy one, dont care about distance?
     var deltaLat = Math.abs(this.state.place.latitude - this.state.locations[0].latitude);
@@ -77,17 +91,14 @@ export default class App extends Component {
     while (this.state.locations[j].capacityQuant == 10000000 && j < 7) {
       j++;
       i++;
-      console.log(i)
-      console.log(j)
     }
-    // if (j == 7)
-    // {
-    //   return something
-    // } //think of some terminating condition if all are closed
+    
     var least = Number(this.state.locations[j].capacityQuant)*busyWeight + distance*distanceWeight;
+    console.log("Least: " + this.state.locations[j].title);
     var leastIndex = j;
-    for (; i < 7; i++)
+    for (; i < this.state.locations.length; i++)
     {
+      //console.log("Current: " + this.state.locations[i].title, "Dist: " + distance, "Capacity: " + this.state.locations[i].capacityQuant);
       deltaLat = Math.abs(this.state.place.latitude - this.state.locations[i].latitude);
       deltaLong = Math.abs(this.state.place.longitude - this.state.locations[i].longitude);
       latSide = Math.pow(deltaLat, 2);
@@ -104,7 +115,7 @@ export default class App extends Component {
         leastIndex = i;
       }
     }
-    return leastIndex;
+    return this.state.locations[leastIndex].title;
   }
 
 
@@ -160,10 +171,11 @@ export default class App extends Component {
     // const [isEnabled, setIsEnabled] = React.useState(false);
     // const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     if (this.state.place.latitude != undefined) { //FIRST ENSURE THAT LATITUDE IS NOT UNDEFINED, set state happens asynchronously
+      
     return( //here, before the return, put like your calculation of all the distances and stuff
       // CURRENT WORKING ONE WITH CURRENT LOCATION POSSIBLE
         <View style = {styles.container}>
-        <Text style = {styles.optimalLocation}>CLOSEST/LEAST BUSY: {this.state.locations[Number(this.state.optimal)].title}</Text>
+        
         <Text style = {styles.optimalLocation}>Press Images for Room Reservations/Menus</Text>
         
         {this.state.place.latitude != undefined && 
@@ -203,7 +215,7 @@ export default class App extends Component {
         </MapView>
       }
       
-
+      <Text style = {styles.optimalLocation}>CLOSEST/LEAST BUSY: {this.preferenceOptimize()}</Text>
       {this.state.currView == 'Dining' &&
       <Button type = 'outline' title = 'ZOOM - ACKERMAN | BOMBSHELTER' onPress={()=>this.animateAckBomb()}/>
       }

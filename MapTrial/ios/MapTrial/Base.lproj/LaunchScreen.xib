@@ -21,10 +21,14 @@
             <constraints>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="17l-Ha-dEN"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3OK-4i-VXS"/>
+                <constraint firstItem="DBw-So-dig" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3sr-Jc-maJ"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5jq-HX-guh"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="76O-SS-7OL"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DMd-El-ELb"/>
+                <constraint firstItem="DBw-So-dig" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GZt-n4-STC"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NLG-hE-395"/>
+                <constraint firstItem="DBw-So-dig" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OII-cb-Vez"/>
+                <constraint firstItem="DBw-So-dig" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OVs-E5-hHG"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PvP-8I-8tK"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Qol-30-u7s"/>
                 <constraint firstItem="DBw-So-dig" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Rbt-KU-Gis"/>
@@ -32,7 +36,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="548" y="455"/>
+            <point key="canvasLocation" x="547.82608695652175" y="454.6875"/>
         </view>
     </objects>
     <resources>

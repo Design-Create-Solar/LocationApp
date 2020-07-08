@@ -1,4 +1,4 @@
-export const locations = 
+const locations = 
 [
     {
         title: 'Covel', latitude: 34.072960,
@@ -85,7 +85,7 @@ export const locations =
     },
 
     {
-        title: 'Study', latitude: 34.07326,
+        title: 'Study', latitude: 34.07326, //remember that this is a duplicate, use the same one in MongoDB
         longitude: -118.452333,
         fullname: 'The Study at Hedrick',
         address: '250 De Neve Dr, Los Angeles',
@@ -97,7 +97,7 @@ export const locations =
     },
 
     {
-        title: 'N.C Center', latitude: 34.074400,
+        title: 'N.C. Center', latitude: 34.074400,
         longitude: -118.442051,
         fullname: 'North Campus Student Center',
         address: 'Los Angeles, CA 90095',
@@ -157,29 +157,29 @@ export const locations =
     },
     //ACKERMAN, SYNTHETIC COORDINATES TO MAKE VIEWING EASIER
 
-    {
-        title: 'Gr.House', latitude: 34.070387, 
-        longitude: -118.444222,
-        fullname: 'Greenhouse',
-        address: 'Ackerman, AU-1390B, 308 Westwood Plaza, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/7Fo-Kl_0drun6X1NSArOGw/348s.jpg",
-        website: "https://www.yelp.com/biz/the-greenhouse-los-angeles",
-        weight:13
-    },
+    // {
+    //     title: 'Gr.House', latitude: 34.070387, 
+    //     longitude: -118.444222,
+    //     fullname: 'Greenhouse',
+    //     address: 'Ackerman, AU-1390B, 308 Westwood Plaza, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/7Fo-Kl_0drun6X1NSArOGw/348s.jpg",
+    //     website: "https://www.yelp.com/biz/the-greenhouse-los-angeles",
+    //     weight:13
+    // },
 
-    {
-        title: 'Wetzel\'s', latitude: 34.07043, //synthetic
-        longitude: -118.444190,
-        fullname: 'Wetzel\'s Pretzels',
-        address: '308 Westwood Plaza, AU 1390B, Los Angeles, CA 90024',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://media-cdn.tripadvisor.com/media/photo-s/11/dd/72/f6/pic.jpg",
-        website: "https://www.wetzels.com/",
-        weight:13
-    },
+    // {
+    //     title: 'Wetzel\'s', latitude: 34.07043, //synthetic
+    //     longitude: -118.444190,
+    //     fullname: 'Wetzel\'s Pretzels',
+    //     address: '308 Westwood Plaza, AU 1390B, Los Angeles, CA 90024',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://media-cdn.tripadvisor.com/media/photo-s/11/dd/72/f6/pic.jpg",
+    //     website: "https://www.wetzels.com/",
+    //     weight:13
+    // },
 
     {
         title: 'Rubio\'s', latitude: 34.070377, 
@@ -193,17 +193,17 @@ export const locations =
         weight:13
     },
 
-    {
-        title: 'Wolfgang', latitude: 34.07034, //synthetic 
-        longitude: -118.444206,
-        fullname: 'Wolfgang Puck Express',
-        address: 'Ackerman Union, 308 Westwood Plaza level 1, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://dailybruin.com/images/2013/09/ef3af866-17e2-4b40-a51c-09110f2c5931.jpg",
-        website: "https://wolfgangpuck.com/dining/wolfgang-puck-express-los-angeles/",
-        weight:13
-    },
+    // {
+    //     title: 'Wolfgang', latitude: 34.07034, //synthetic 
+    //     longitude: -118.444206,
+    //     fullname: 'Wolfgang Puck Express',
+    //     address: 'Ackerman Union, 308 Westwood Plaza level 1, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://dailybruin.com/images/2013/09/ef3af866-17e2-4b40-a51c-09110f2c5931.jpg",
+    //     website: "https://wolfgangpuck.com/dining/wolfgang-puck-express-los-angeles/",
+    //     weight:13
+    // },
 
     {
         title: 'Panda', latitude: 34.070481, 
@@ -217,41 +217,41 @@ export const locations =
         weight:13
     },
 
-    {
-        title: 'Sweetspot', latitude: 34.070381, //synthetic
-        longitude: -118.44426, 
-        fullname: 'Sweetspot',
-        address: '308 Westwood Plaza, Ackerman Level 1, AU-1390B, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/an86vECSTWN-aHSqi66mlQ/300s.jpg",
-        website: "https://www.yelp.com/biz/sweetspot-los-angeles",
-        weight:13
-    },
+    // {
+    //     title: 'Sweetspot', latitude: 34.070381, //synthetic
+    //     longitude: -118.44426, 
+    //     fullname: 'Sweetspot',
+    //     address: '308 Westwood Plaza, Ackerman Level 1, AU-1390B, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/an86vECSTWN-aHSqi66mlQ/300s.jpg",
+    //     website: "https://www.yelp.com/biz/sweetspot-los-angeles",
+    //     weight:13
+    // },
 
-    {
-        title: 'Lollicup', latitude: 34.070419, 
-        longitude: -118.444144,
-        fullname: 'Lollicup Fresh',
-        address: 'Ackerman Union, Westwood Plaza, Los Angeles, CA 90095',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://img.grouponcdn.com/deal/2Fd1WKu43Nj7FFiZAC4PjmYvtXEa/2F-2048x1227/v1/c700x420.jpg",
-        website: "https://www.lollicupfresh.com/menu",
-        weight:13
-    },
+    // {
+    //     title: 'Lollicup', latitude: 34.070419, 
+    //     longitude: -118.444144,
+    //     fullname: 'Lollicup Fresh',
+    //     address: 'Ackerman Union, Westwood Plaza, Los Angeles, CA 90095',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://img.grouponcdn.com/deal/2Fd1WKu43Nj7FFiZAC4PjmYvtXEa/2F-2048x1227/v1/c700x420.jpg",
+    //     website: "https://www.lollicupfresh.com/menu",
+    //     weight:13
+    // },
 
-    {
-        title: 'Veggie', latitude: 34.070424, //synthetic
-        longitude: -118.4441,
-        fullname: 'Veggie Grill',
-        address: '308 Westwood Plaza Ackerman Student Union, Level 1, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://d3vhp0ldxntuok.cloudfront.net/image/1089/b10/0.5,0.5/small",
-        website: "https://www.veggiegrill.com/menu.html",
-        weight:13
-    },
+    // {
+    //     title: 'Veggie', latitude: 34.070424, //synthetic
+    //     longitude: -118.4441,
+    //     fullname: 'Veggie Grill',
+    //     address: '308 Westwood Plaza Ackerman Student Union, Level 1, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://d3vhp0ldxntuok.cloudfront.net/image/1089/b10/0.5,0.5/small",
+    //     website: "https://www.veggiegrill.com/menu.html",
+    //     weight:13
+    // },
 
     {
         title: 'Taco Bell', latitude: 34.070385, 
@@ -266,42 +266,42 @@ export const locations =
     },
 
  //finish from Bruin Buzz
-    {
-        title: 'B. Buzz', latitude: 34.07044, //synthetic
-        longitude: -118.44424,
-        fullname: 'Bruin Buzz',
-        address: 'Bruin Buzz, 308 Westwood Plaza, Ackerman A-Level, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://dailybruin.com/images/44852_web.ns.11.8.nightpeople.picco.jpg",
-        website: "https://www.yelp.com/biz/bruin-buzz-los-angeles",
-        weight:13
-    },
+    // {
+    //     title: 'B. Buzz', latitude: 34.07044, //synthetic
+    //     longitude: -118.44424,
+    //     fullname: 'Bruin Buzz',
+    //     address: 'Bruin Buzz, 308 Westwood Plaza, Ackerman A-Level, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://dailybruin.com/images/44852_web.ns.11.8.nightpeople.picco.jpg",
+    //     website: "https://www.yelp.com/biz/bruin-buzz-los-angeles",
+    //     weight:13
+    // },
 
-    {
-        title: 'Curbside', latitude: 34.07033,  //synthetic
-        longitude: -118.444245,
-        fullname: 'Curbside',
-        address: 'Curbside, 308 Westwood Plaza, Ackerman A-Level, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/2TqepNGy06qQyWKSy_BjFA/348s.jpg",
-        website: "https://www.yelp.com/biz/curbside-los-angeles",
-        weight:13
-    },
+    // {
+    //     title: 'Curbside', latitude: 34.07033,  //synthetic
+    //     longitude: -118.444245,
+    //     fullname: 'Curbside',
+    //     address: 'Curbside, 308 Westwood Plaza, Ackerman A-Level, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/2TqepNGy06qQyWKSy_BjFA/348s.jpg",
+    //     website: "https://www.yelp.com/biz/curbside-los-angeles",
+    //     weight:13
+    // },
     
 
-    {
-        title: 'Kikka', latitude: 34.0704,   //synthetic
-        longitude: -118.4443,
-        fullname: 'Kikka-Sushi',
-        address: 'Ackerman A, 308 Westwood Plaza #233b, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/41ZRTDXRYhvDs17ezIxWvA/348s.jpg",
-        website: "https://www.yelp.com/biz/kikka-los-angeles",
-        weight:13
-    },
+    // {
+    //     title: 'Kikka', latitude: 34.0704,   //synthetic
+    //     longitude: -118.4443,
+    //     fullname: 'Kikka-Sushi',
+    //     address: 'Ackerman A, 308 Westwood Plaza #233b, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://s3-media0.fl.yelpcdn.com/bphoto/41ZRTDXRYhvDs17ezIxWvA/348s.jpg",
+    //     website: "https://www.yelp.com/biz/kikka-los-angeles",
+    //     weight:13
+    // },
 
     {
         title: 'Carl\'s Jr.', latitude: 34.07047,    //synthetic
@@ -315,17 +315,17 @@ export const locations =
         weight:13
     },
 
-    {
-        title: 'Jamba', latitude: 34.070634,     //synthetic
-        longitude: -118.444308,
-        fullname: 'Jamba UCLA',
-        address: '308 Westwood Plaza A260, Los Angeles',
-        capacity: -1,
-        capacityQuant: -1,
-        markerImage: "https://img.grouponcdn.com/deal/3qVF4YZD32qb6GgDzP9dQSMWs1EC/3q-1006x604/v1/c700x420.jpg",
-        website: "https://www.jamba.com/menu",
-        weight:13
-    },
+    // {
+    //     title: 'Jamba', latitude: 34.070634,     //synthetic
+    //     longitude: -118.444308,
+    //     fullname: 'Jamba UCLA',
+    //     address: '308 Westwood Plaza A260, Los Angeles',
+    //     capacity: -1,
+    //     capacityQuant: -1,
+    //     markerImage: "https://img.grouponcdn.com/deal/3qVF4YZD32qb6GgDzP9dQSMWs1EC/3q-1006x604/v1/c700x420.jpg",
+    //     website: "https://www.jamba.com/menu",
+    //     weight:13
+    // },
 
     {
         title: 'Kerck.', latitude: 34.070592,     
@@ -425,3 +425,4 @@ export const locations =
         weight:13
     },
 ]
+module.exports = locations;
