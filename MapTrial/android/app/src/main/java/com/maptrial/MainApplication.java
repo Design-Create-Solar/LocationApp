@@ -5,11 +5,15 @@ import android.content.Context;
 
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.geolocation.GeolocationPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -24,9 +28,14 @@ public class MainApplication extends Application implements ReactApplication {
           return BuildConfig.DEBUG;
         }
 
-          protected List<ReactPackage> getPackages() {
+        @Override
+        protected List<ReactPackage> getPackages() {
               return Arrays.<ReactPackage>asList(
                       new MainReactPackage(),
+            new GeolocationPackage(),
+            new ReanimatedPackage(),
+            new SplashScreenReactPackage(),
+            new RNGestureHandlerPackage(),
                       new MapsPackage()
               );
           }
