@@ -1,27 +1,38 @@
-//console.log(Venue)
-//also WHATS A GOOD NAME FOR THE APP
+const result = require('dotenv').config();
+if (result.error) {
+  throw result.error;
+}
 
-var Venue = require('../models/busyness.js')
+console.log(result.parsed);
 
-var express = require("express");
-let app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongoose = require('mongoose');
 
-app.get("/:location", async (req, res) => {
-    let temp = await Venue.find({ 'venue_name': req.params.location }, 'busyness', function (err, venues) {
-        if (err) return handleError(err);
-        return venues[0].busyness;
-    })
-    res.json(
-    {
-        "venue": temp
-    })
-} )
-app.listen(5000);
+const app = express();
+const PORT = 5000;
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-var mongoose = require("mongoose");
-var mongoDB = 'mongodb+srv://designcreatesolar:solarclub@cluster0-mcpqp.mongodb.net/venue_busyness?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+let dev_db_url = process.env.LOCATIONS_DB_URL;
 
-var db = mongoose.connection;
+mongoose.connect(
+  dev_db_url,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  },
+  () => console.log('connection to mongoDB successful'),
+);
+let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
+//end mongoose setup
+//routes
+const locations = require('../routes/locations');
+app.use('/locations', locations);
+app.listen(PORT, () => {
+  console.log('Listening on ' + PORT);
+});
